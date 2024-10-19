@@ -16,9 +16,6 @@ contract ProposalFactory {
     // Events
     event ProposalCreated(address proposalAddress, address creator);
 
-    // Errors
-    error InvalidImplementationAddress();
-
     // Create a new cloned Proposal contract
     function createProposal(
         string memory _description,

@@ -55,16 +55,16 @@ contract ApplicationSubmission {
       and only during the reveal phase. 
       Any applicant who has submitted a budget within 10% of the proposal budget will have their budget set.
      */
-    function setBudgets(uint8[] memory budgets) external onlyProposal {
-        uint8 proposalBudget = budgets[0];
-        for (uint i = 1; i < applicants.length; i++) {
+    function setBudgets(uint[] memory budgets) external onlyProposal {
+        uint proposalBudget = budgets[0];
+        for (uint i = 0; i < applicants.length; i++) {
             if (
-                (budgets[i] < ((proposalBudget * 110) / 100)) &&
-                (budgets[i] > ((proposalBudget * 9) / 10))
+                (budgets[i + 1] < ((proposalBudget * 110) / 100)) &&
+                (budgets[i + 1] > ((proposalBudget * 9) / 10))
             ) {
                 // set the budget only for the applicants who have submitted a budget
                 // within 10% of the proposal budget
-                applications[applicants[i]].budget = budgets[i];
+                applications[applicants[i]].budget = budgets[i + 1];
             }
         }
     }

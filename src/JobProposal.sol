@@ -19,7 +19,7 @@ contract JobProposal is FunctionsClient {
 
     // State
     bytes32 public s_lastRequestId;
-    // Encoded uint8 array of budgets - to be revealed by the oracle at the start of the voting phase
+    // Encoded uint array of budgets - to be revealed by the oracle at the start of the voting phase
     bytes public s_lastResponse;
     bytes public s_lastError;
 
@@ -32,7 +32,7 @@ contract JobProposal is FunctionsClient {
     // Encrypted budget
     string public encrypted_budget;
     // Actual budget in usd/hour - will be revealed at the start of the voting phase
-    uint8 public budget;
+    uint public budget;
     // Submission phase end timestamp
     uint public submission_phase_end_timestamp;
     // Voting phase end timestamp
@@ -143,7 +143,7 @@ contract JobProposal is FunctionsClient {
      * @notice Reveal the budgets. This function will be called by creator after the oracle has revealed the budgets.
       The s_lastResponse from the fulfillRequest will be decoded off chain and the budgets will be set.
      */
-    function setBudgets(uint8[] memory _budgets) public onlyCreator {
+    function setBudgets(uint[] memory _budgets) public onlyCreator {
         // TODO - removed for the demo
         // if (block.timestamp < voting_phase_end_timestamp)
         //     revert VotingPeriodNotStarted();
