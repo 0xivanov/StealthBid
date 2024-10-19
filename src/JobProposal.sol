@@ -112,7 +112,8 @@ contract JobProposal is FunctionsClient {
         uint32 gasLimit,
         bytes32 donID
     ) public onlyCreator returns (bytes32 requestId) {
-        if (budget > 0) revert BudgetAlreadyRevealed();
+        if (s_lastResponse.length > 0) revert BudgetAlreadyRevealed();
+        // TODO - removed for the demo
         // if (block.timestamp < submission_phase_end_timestamp)
         //     revert SubmissionPeriodNotOver();
 
@@ -143,6 +144,7 @@ contract JobProposal is FunctionsClient {
       The s_lastResponse from the fulfillRequest will be decoded off chain and the budgets will be set.
      */
     function setBudgets(uint8[] memory _budgets) public onlyCreator {
+        // TODO - removed for the demo
         // if (block.timestamp < voting_phase_end_timestamp)
         //     revert VotingPeriodNotStarted();
         // if (block.timestamp > voting_phase_end_timestamp)
@@ -160,16 +162,16 @@ contract JobProposal is FunctionsClient {
      * @param amount The number of tokens to stake
      */
     function vote(address submitter, uint amount) public hasNotVoted {
+        uint voterBalance = governanceToken.balanceOf(msg.sender);
+        // TODO - removed for the demo
         // if (executed) revert ProposalAlreadyExecuted();
         // if (block.timestamp < submission_phase_end_timestamp)
         //     revert VotingPeriodNotStarted();
         // if (block.timestamp > voting_phase_end_timestamp)
         //     revert VotingPeriodOver();
 
-        uint voterBalance = governanceToken.balanceOf(msg.sender);
-        if (voterBalance < amount) revert InsufficientTokens();
+        // if (voterBalance < amount) revert InsufficientTokens();
 
-        // TODO
         //       Transfer the tokens to the contract (staking)
         // bool success = governanceToken.transferFrom(
         //     msg.sender,
@@ -197,6 +199,7 @@ contract JobProposal is FunctionsClient {
      */
     function execute() public onlyCreator {
         if (executed) revert ProposalAlreadyExecuted();
+        // TODO - removed for the demo
         // if (block.timestamp < voting_phase_end_timestamp)
         //     revert ExecutionPeriodNotStarted();
 
@@ -224,7 +227,7 @@ contract JobProposal is FunctionsClient {
             address voter = voteAddresses[i];
             uint amount = stakedTokens[voter];
             if (amount > 0) {
-                // TODO
+                // TODO - removed for the demo
                 // governanceToken.transfer(voter, amount);
                 emit TokensUnstaked(voter, amount);
             }

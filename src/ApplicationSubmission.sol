@@ -79,6 +79,7 @@ contract ApplicationSubmission {
         if (applications[msg.sender].applicant != address(0))
             revert ApplicationAlreadyExists(); // Ensure the user hasn't already submitted an application
 
+        // TODO - removed for the demo
         // if (
         //     block.timestamp >
         //     Proposal(proposalAddress).submission_phase_end_timestamp()
